@@ -619,20 +619,29 @@ class WikiLinkerSettingTab extends PluginSettingTab {
   }
 }
 
-function extractHighlights(content) {
-  const sectionMatch = content.match(
-    /(?:^|\n)#{1,6}\s*高亮划线[\s\S]*?(?=\n#{1,6}\s*(?:读书笔记|本书评论)\s*$|$)/m
-  );
+function function extractHighlights(content) {
+  const heading =
+    /(?:^|\n)#{1,6}\s*高亮划线[^\n]*(?:\n|$)/.exec(content);
 
-  if (!sectionMatch) return [];
+  if (!heading) return [];
 
-  const section = sectionMatch[0];
+  const start = heading.index + heading[0].length;
+  const remaining = content.slice(start);
+  const nextHeading =
+    /\n#{1,6}\s*(?:读书笔记|本书评论)[^\n]*(?:\n|$)/.exec(
+      remaining
+    );
+
+  const section = nextHeading
+    ? remaining.slice(0, nextHeading.index)
+    : remaining;
+
   const highlights = [];
 
   for (const line of section.split("\n")) {
     if (!line.includes("📌")) continue;
 
-    let text = line
+    const text = line
       .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
       .replace(/<[^>]+>/g, "")
       .replace(/^.*?📌\s*/, "")
