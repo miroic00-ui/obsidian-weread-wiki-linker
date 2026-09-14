@@ -1,0 +1,10 @@
+{
+  "id": "weread-wiki-linker",
+  "name": "Weread Wiki Linker",
+  "version": "0.1.0",
+  "minAppVersion": "1.5.0",
+  "description": "Enrich WeRead highlights with Gemini-selected Chinese Wikipedia notes and bidirectional links.",
+  "author": "momo",
+  "authorUrl": "https://github.com/miroic00-ui",
+  "isDesktopOnly": false
+}
