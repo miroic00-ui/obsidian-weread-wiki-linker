@@ -619,7 +619,7 @@ class WikiLinkerSettingTab extends PluginSettingTab {
   }
 }
 
-function extractHighlights(content) {(content) {
+function extractHighlights(content) {
   const heading =
     /(?:^|\n)#{1,6}\s*高亮划线[^\n]*(?:\n|$)/.exec(content);
 
